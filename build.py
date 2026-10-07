@@ -195,7 +195,19 @@ def write_netlify_toml(inline_scripts, ga4=False):
     Cache-Control = "public, max-age=3600, must-revalidate"
 """
     (OUT / "netlify.toml").write_text(toml)
-    print("built netlify.toml (CSP hashes:", hashes + ")")
+    # Git deploys read netlify.toml from the repo root (no base directory set in Netlify), so write a root
+    # copy that publishes site/ with the same headers. Drag-and-drop deploys of site/ keep using the one above.
+    root_toml = toml.replace(
+        '# Netlify configuration for the Kino Consulting site (static, no build step).\n',
+        '# Netlify configuration for Git deploys of the Kino Consulting site (static, no build step).\n', 1
+    ).replace(
+        '[build]\n  publish = "."\n',
+        '[build]\n  publish = "site"\n\n[build.environment]\n'
+        '  # Nothing to build: skip installing the test tools on Netlify.\n'
+        '  NPM_FLAGS = "--omit=dev"\n  PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1"\n', 1)
+    assert 'publish = "site"' in root_toml
+    (ROOT / "netlify.toml").write_text(root_toml)
+    print("built netlify.toml + root netlify.toml (CSP hashes:", hashes + ")")
 
 
 if __name__ == "__main__":
