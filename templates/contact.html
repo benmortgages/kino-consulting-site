@@ -1,0 +1,134 @@
+---
+title: Contact | Start Your Project | Kino Consulting, Inc.
+og_title: Start a project — Kino Consulting, Inc.
+description: Tell Kino Consulting about your construction project. We'll follow up to talk through your goals, timeline, and budget, and recommend the right level of support.
+canonical: /contact.html
+body_class: page-contact header-solid
+nav: contact
+scripts: <script src="js/contact-form.js" defer></script>
+---
+<section class="page-hero">
+  <div class="page-hero__bg"><img src="img/steel-wide.webp" srcset="img/steel-wide-1000.webp 1000w, img/steel-wide.webp 2000w" sizes="100vw" width="2000" height="1130" alt="" fetchpriority="high"></div>
+  <div class="container">
+    <span class="crumb">Contact</span>
+    <h1>Tell us about your project.</h1>
+    <p>Share a few details and we'll follow up to talk through your goals, timeline, and budget, and the level of support that makes sense.</p>
+  </div>
+</section>
+
+<section class="section section--concrete" aria-label="Project inquiry">
+  <div class="container contact">
+    <div class="form-col">
+    <form class="form" name="project-inquiry" method="POST" action="thank-you.html" enctype="multipart/form-data" data-netlify="true" netlify-honeypot="bot-field" data-ajax>
+      <input type="hidden" name="form-name" value="project-inquiry">
+      <p class="hp-field"><label>Leave this field empty <input type="text" name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <div class="form__grid">
+        <div class="field">
+          <label for="f-name">Name</label>
+          <input id="f-name" name="name" type="text" autocomplete="name" maxlength="120" required>
+        </div>
+        <div class="field">
+          <label for="f-email">Email</label>
+          <input id="f-email" name="email" type="email" autocomplete="email" maxlength="254" required>
+        </div>
+        <div class="field">
+          <label for="f-phone">Phone <small>(optional)</small></label>
+          <input id="f-phone" name="phone" type="tel" autocomplete="tel" maxlength="30" pattern="[0-9\s\(\)\+\.\-xX]{7,30}" title="Use digits, spaces, dashes, dots or parentheses, for example (630) 555-0123">
+        </div>
+        <div class="field">
+          <label for="f-location">Project location <small>(city, optional)</small></label>
+          <input id="f-location" name="location" type="text" autocomplete="address-level2" maxlength="120">
+        </div>
+        <div class="field">
+          <label for="f-client">I'm a <small>(optional)</small></label>
+          <select id="f-client" name="client_type">
+            <option value="">Choose one</option>
+            <option>Business owner</option>
+            <option>Property owner or investor</option>
+            <option>Homeowner</option>
+            <option>Organization or facility owner</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-timeline">When do you hope to start? <small>(optional)</small></label>
+          <select id="f-timeline" name="timeline">
+            <option value="">Choose one</option>
+            <option>As soon as possible</option>
+            <option>Within 3 months</option>
+            <option>In 3 to 6 months</option>
+            <option>6 months or more</option>
+            <option>Just exploring</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-type">Project type <small>(optional)</small></label>
+          <select id="f-type" name="project_type">
+            <option value="">Choose one</option>
+            <option>Tenant buildout</option>
+            <option>Renovation or remodel</option>
+            <option>New construction or addition</option>
+            <option>Facility or school improvement</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-budget">Estimated budget <small>(optional)</small></label>
+          <select id="f-budget" name="budget">
+            <option value="">Choose one</option>
+            <option>Under $50k</option>
+            <option>$50k to $150k</option>
+            <option>$150k to $500k</option>
+            <option>$500k or more</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <fieldset class="field field--full">
+          <legend>What kind of help are you looking for?</legend>
+          <div class="choice-group">
+            <label class="choice"><input type="radio" name="service" value="Construction Consulting"><span>Construction Consulting</span></label>
+            <label class="choice"><input type="radio" name="service" value="Construction Management"><span>Construction Management</span></label>
+            <label class="choice"><input type="radio" name="service" value="General Contracting"><span>General Contracting</span></label>
+            <label class="choice"><input type="radio" name="service" value="Design-Build"><span>Design-Build</span></label>
+            <label class="choice"><input type="radio" name="service" value="Not Sure Yet" checked><span>Not Sure Yet</span></label>
+          </div>
+        </fieldset>
+        <div class="field field--full">
+          <label for="f-message">Tell us about your project</label>
+          <textarea id="f-message" name="message" maxlength="5000" required placeholder="What are you planning, and where are you in the process?"></textarea>
+        </div>
+        <div class="field field--full">
+          <label for="f-plans">Plans or photos <small>(optional)</small></label>
+          <input id="f-plans" name="plans" type="file" accept=".pdf,.jpg,.jpeg,.png,.heic,.heif,application/pdf,image/jpeg,image/png,image/heic,image/heif" aria-describedby="f-plans-hint" data-max-mb="7">
+          <p class="field__hint" id="f-plans-hint">One file, up to 7 MB: PDF, JPG, PNG or HEIC. Larger files can be emailed to {{email}}.</p>
+        </div>
+      </div>
+      <p class="form__error" role="alert" tabindex="-1" hidden>Your details didn't send. Check your connection and try again, or call us at <a href="tel:{{phone_tel}}">{{phone}}</a>.</p>
+      <div class="form__foot">
+        <button class="btn" type="submit">Send project details</button>
+        <p>Name, email, and project details are required.</p>
+      </div>
+    </form>
+    <div class="form-success" id="form-success" hidden>
+      <span class="form-success__mark" aria-hidden="true"></span>
+      <h2 tabindex="-1">Thank you<span data-first-name></span>.</h2>
+      <p>A member of our team will reach out to you shortly to talk through your project.</p>
+      <p class="form-success__small">If it's time-sensitive, call us at <a href="tel:{{phone_tel}}">{{phone}}</a>.</p>
+    </div>
+    </div>
+
+    <aside>
+      <h2 class="visually-hidden">What Happens Next</h2>
+      <ol class="next-steps">
+        <li><h3>We Review Your Details</h3><p>We read your project information and reach out to set up a conversation.</p></li>
+        <li><h3>We Talk Through Your Project</h3><p>Goals, scope, timeline, budget, and how involved you want to be.</p></li>
+        <li><h3>We Recommend an Approach</h3><p>Consulting, construction management, general contracting, or design-build, whichever fits your project best.</p></li>
+      </ol>
+      <dl class="contact-card">
+        <dt>Phone</dt><dd><a href="tel:{{phone_tel}}">{{phone}}</a></dd>
+        <dt>Email</dt><dd><a href="mailto:{{email}}">{{email}}</a></dd>
+        <dt>Service area</dt><dd>{{service_area}}</dd>
+      </dl>
+    </aside>
+  </div>
+</section>

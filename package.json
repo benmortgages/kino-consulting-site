@@ -1,0 +1,19 @@
+{
+  "name": "kino-consulting-site",
+  "private": true,
+  "description": "Static site for Kino Consulting, Inc. (deployed to Netlify from ./site). Dev tooling only; nothing here is deployed.",
+  "scripts": {
+    "build": "python3 build.py",
+    "lint:html": "html-validate \"site/*.html\"",
+    "lint:js": "eslint site/js tests",
+    "test": "node tests/smoke.js",
+    "check": "npm run build && npm run lint:html && npm run lint:js && npm test"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "eslint": "^9.0.0",
+    "globals": "^15.0.0",
+    "html-validate": "^9.0.0",
+    "playwright": "^1.0.0"
+  }
+}

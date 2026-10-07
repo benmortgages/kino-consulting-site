@@ -1,0 +1,14 @@
+# Dependencies and local tooling
+node_modules/
+# Raw footage, renders and working copies (large; not part of the website)
+raw/
+frames_hd/
+src/
+preview/
+*.zip
+render_hd.*
+shoot.js
+assets/*
+!assets/andrea-aranki-2026.png
+!assets/jake-aranki-2026.png
+.DS_Store
