@@ -17,6 +17,8 @@ function check(ok, name, detail) {
 
 async function newPage(browser, w, h) {
   const ctx = await browser.newContext({ viewport: { width: w, height: h }, isMobile: w < 600, hasTouch: w < 1100 });
+  // Google Analytics loads from Google; tests run offline, so answer those requests with an empty stub.
+  await ctx.route(/googletagmanager\.com|google-analytics\.com|analytics\.google\.com/, (r) => r.fulfill({ status: 200, contentType: "text/javascript", body: "" }));
   const page = await ctx.newPage();
   page.problems = [];
   page.on("console", (m) => { if (m.type() === "error") page.problems.push(m.text()); });
@@ -100,6 +102,13 @@ async function newPage(browser, w, h) {
   const hdr = (await page.request.get(`${BASE}/`)).headers();
   check(/default-src 'self'/.test(hdr["content-security-policy"] || ""), "CSP header present");
   check(!!hdr["strict-transport-security"] && hdr["x-content-type-options"] === "nosniff", "HSTS + nosniff headers present");
+  {
+    const csp = hdr["content-security-policy"] || "";
+    const html = await (await page.request.get(`${BASE}/index.html`)).text();
+    const tagged = /googletagmanager\.com\/gtag\/js\?id=G-[A-Z0-9]+/.test(html) && /js\/analytics\.js/.test(html);
+    check(tagged && /script-src[^;]*googletagmanager\.com/.test(csp) && /connect-src[^;]*google-analytics\.com/.test(csp),
+      "Google Analytics tag present and allowed by the CSP (only Google's hosts added)");
+  }
 
   // 4. No horizontal scrolling at any viewport
   for (const [w, h] of VIEWPORTS) {

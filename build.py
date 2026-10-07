@@ -17,7 +17,7 @@ CONFIG = {
     "service_area": "Chicagoland",
     "site_url": "https://kinoconsult.com",   # no trailing slash
     "service_area_confirmed": False,         # set True once the service area is confirmed
-    "ga4_id": "",                            # Google Analytics 4 Measurement ID, e.g. "G-ABC123XYZ". Empty = no tracking.
+    "ga4_id": "G-KQWPGESSNP",                # Google Analytics 4 Measurement ID, e.g. "G-ABC123XYZ". Empty = no tracking.
 }
 
 PAGES = ["index.html", "services.html", "how-we-work.html", "about.html", "contact.html", "thank-you.html", "404.html"]
