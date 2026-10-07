@@ -1,0 +1,27 @@
+# Kino Consulting website — working notes for Claude
+
+Static site for Kino Consulting, Inc. (kinoconsult.com). Owner of the repo and Netlify account: Ben (benmortgages).
+Client: Andrea Aranki (President & CEO) and Jake Aranki (Executive Vice President).
+
+## How publishing works
+- Netlify deploys automatically from the `main` branch of this repo. Netlify settings: base directory `site`, no build command;
+  `site/netlify.toml` sets publish `.` plus all security/caching headers.
+- `site/` is the built website and is committed. Never hand-edit `site/*.html` or `site/netlify.toml`: `build.py` overwrites them.
+- Never ship a partial site (the Oct 3 incident: a 13-file zip replaced the whole site).
+
+## Making a change
+1. Edit `templates/*.html` (pages) or `site/css`, `site/js`, `site/img` directly. Contact details and the GA4 ID live in `CONFIG` in `build.py`.
+2. `npm install` (first time), then `npm run check` = build → html-validate → ESLint → Playwright smoke tests. All must pass.
+   Playwright: launch Chromium with `executablePath: '/opt/pw-browsers/chromium'` when the bundled browser is missing.
+3. Commit and push to `main`; Netlify publishes in a minute or two. Verify the live page afterwards.
+
+## Conventions
+- Headings, card titles, nav, footer links and form choice labels: title case (Chicago style; "Four Ways to Work with Us").
+  Sentence headlines ending in a period, buttons and CTA links stay in sentence case ("Start a project").
+- Slogan: "Your Vision. Built Right."
+- Services, in order of Kino's involvement: Construction Consulting, Construction Management, General Contracting, Design-Build.
+- Don't invent facts about Kino (licenses, numbers, projects, reviews). Ask Ben; copy Claude wrote should be reviewed by Kino.
+- Hero footage lives in `site/frames/v2/` and is cached forever: new footage goes in `frames/v3/`. Images in `site/img/` are cached
+  for a day, so replaced images get new file names.
+- Google Analytics 4 (G-KQWPGESSNP) is on; the CSP opens only for Google's hosts when `ga4_id` is set. Analytics never receives
+  names, emails, phone numbers or messages.
